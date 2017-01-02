@@ -4,19 +4,26 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     TabLayout tabLayout;
     PagerAdapter adapter;
     int tabCount = 4;
+//    public static String[] toolBarTitle = {"Task", "To do", "Weather", "Location"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tab();
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+            if(getSupportActionBar()!=null){
+                getSupportActionBar().setTitle("Reminder");
+        }
     }
 
     public void tab() {

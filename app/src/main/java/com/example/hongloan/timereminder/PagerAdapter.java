@@ -24,8 +24,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     int tabCount;
     public static int[] tabIconId = {R.drawable.ic_plus, R.drawable.ic_justify_paragrap, R.drawable.ic_cloud, R.drawable.ic_location};
 
-//    public static String[] tabTitle = {"Task", "To do", "Weather", "Location"};
-
     public PagerAdapter(FragmentManager fm, int tabCount, Context context) {
         super(fm);
         this.context = context;
@@ -59,7 +57,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        //Cần coi lại
         Drawable image = ContextCompat.getDrawable(context, tabIconId[position]);
         image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
         SpannableString sb = new SpannableString(" ");
