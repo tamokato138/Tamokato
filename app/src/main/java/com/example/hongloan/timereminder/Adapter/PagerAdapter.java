@@ -1,4 +1,4 @@
-package com.example.hongloan.timereminder;
+package com.example.hongloan.timereminder.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,6 +10,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 
+import com.example.hongloan.timereminder.R;
 import com.example.hongloan.timereminder.Tabs.GroupTaskList;
 import com.example.hongloan.timereminder.Tabs.LocationTab;
 import com.example.hongloan.timereminder.Tabs.TaskList;
@@ -22,7 +23,7 @@ import com.example.hongloan.timereminder.Tabs.WeatherTab;
 public class PagerAdapter extends FragmentStatePagerAdapter {
     Context context;
     int tabCount;
-    public static int[] tabIconId = {R.drawable.ic_plus, R.drawable.ic_justify_paragrap, R.drawable.ic_cloud, R.drawable.ic_location};
+    public static int[] tabIconId = {R.drawable.ic_menu, R.drawable.ic_list_task, R.drawable.ic_weather, R.drawable.ic_location};
 
     public PagerAdapter(FragmentManager fm, int tabCount, Context context) {
         super(fm);
@@ -58,7 +59,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         Drawable image = ContextCompat.getDrawable(context, tabIconId[position]);
-        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+        image.setBounds(1, 1, image.getIntrinsicWidth()/4, image.getIntrinsicHeight()/4);
         SpannableString sb = new SpannableString(" ");
         ImageSpan imageSpan = new ImageSpan(image);
         sb.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
