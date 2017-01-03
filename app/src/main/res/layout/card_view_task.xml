@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_task"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_view_task_margin"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardCornerRadius="@dimen/card_view_task_radious">
+
+    <RelativeLayout
+        style="@style/AlertDialog.AppCompat.Light"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/card_view_task_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/card_view_task_rd_done"
+            android:layout_toRightOf="@+id/card_view_task_rd_done"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/card_view_task_tv_title_size"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/card_view_task_tv_times_of_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_view_task_tv_time"
+            android:layout_toEndOf="@+id/card_view_task_rd_done"
+            android:layout_toRightOf="@+id/card_view_task_rd_done"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/card_view_task_tv_times_remind_size"
+            tools:text="every hour" />
+
+        <RadioButton
+            android:id="@+id/card_view_task_rd_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_view_task_rd_done_margin" />
+
+        <Switch
+            android:id="@+id/card_view_task_sw_on_off_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/card_view_task_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/card_view_task_tv_time_size"
+            tools:text="20/11/2016"
+            android:layout_below="@+id/card_view_task_tv_title"
+            android:layout_toRightOf="@+id/card_view_task_rd_done"
+            android:layout_toEndOf="@+id/card_view_task_rd_done" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
