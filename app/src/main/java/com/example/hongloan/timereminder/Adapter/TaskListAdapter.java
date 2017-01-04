@@ -10,11 +10,14 @@ import android.widget.TextView;
 
 import com.example.hongloan.timereminder.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hong Loan on 03/01/2017.
  */
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+    ArrayList<String> mData;
 
     @Override
     public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -25,11 +28,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TaskListAdapter.ViewHolder holder, int position) {
+        holder.tvTitle.setText(mData.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mData.size();
     }
 
 
@@ -46,6 +50,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             tvTimesRemind = (TextView) itemView.findViewById(R.id.card_view_task_tv_times_of_remind);
             swOnOff = (Switch) itemView.findViewById(R.id.card_view_task_sw_on_off_remind);
         }
+
+    }
+
+    public void addDataToAdapter(ArrayList<String> mData) {
+        this.mData = mData;
     }
 
 }

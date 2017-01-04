@@ -7,4 +7,5 @@
     <color name="color_tab_selected">#000000</color>
     <color name="color_tab_unselected">#303030</color>
     <color name="color_toolbar">#303030</color>
+    <color name="color_tv_time">#737373</color>
 </resources>

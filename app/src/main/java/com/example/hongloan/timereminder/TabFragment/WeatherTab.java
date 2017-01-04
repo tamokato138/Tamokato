@@ -1,4 +1,4 @@
-package com.example.hongloan.timereminder.Tabs;
+package com.example.hongloan.timereminder.TabFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

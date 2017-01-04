@@ -1,4 +1,4 @@
-package com.example.hongloan.timereminder.Tabs;
+package com.example.hongloan.timereminder.TabFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,12 +12,12 @@ import com.example.hongloan.timereminder.R;
  * Created by Hong Loan on 30/12/2016.
  */
 
-public class LocationTab extends Fragment {
+public class GroupTaskList extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_weather, parent, false);
+        View view = inflater.inflate(R.layout.fragment_group_task_list, parent, false);
         return view;
     }
 }

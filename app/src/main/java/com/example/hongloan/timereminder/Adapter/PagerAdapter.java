@@ -11,10 +11,10 @@ import android.text.Spanned;
 import android.text.style.ImageSpan;
 
 import com.example.hongloan.timereminder.R;
-import com.example.hongloan.timereminder.Tabs.GroupTaskList;
-import com.example.hongloan.timereminder.Tabs.LocationTab;
-import com.example.hongloan.timereminder.Tabs.TaskList;
-import com.example.hongloan.timereminder.Tabs.WeatherTab;
+import com.example.hongloan.timereminder.TabFragment.GroupTaskList;
+import com.example.hongloan.timereminder.TabFragment.LocationTab;
+import com.example.hongloan.timereminder.TabFragment.TaskList;
+import com.example.hongloan.timereminder.TabFragment.WeatherTab;
 
 /**
  * Created by Hong Loan on 30/12/2016.
