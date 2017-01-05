@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
+import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -38,16 +38,16 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        RadioButton rdCheckDone;
-        TextView tvTitle, tvTime, tvTimesRemind;
+        CheckBox chkDone;
+        TextView tvTitle, tvTime, tvPriority;
         Switch swOnOff;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            rdCheckDone = (RadioButton) itemView.findViewById(R.id.card_view_task_rd_done);
+            chkDone = (CheckBox) itemView.findViewById(R.id.card_view_task_chk_done);
             tvTime = (TextView) itemView.findViewById(R.id.card_view_task_tv_time);
             tvTitle = (TextView) itemView.findViewById(R.id.card_view_task_tv_title);
-            tvTimesRemind = (TextView) itemView.findViewById(R.id.card_view_task_tv_times_of_remind);
+            tvPriority = (TextView) itemView.findViewById(R.id.card_view_task_tv_priority);
             swOnOff = (Switch) itemView.findViewById(R.id.card_view_task_sw_on_off_remind);
         }
 

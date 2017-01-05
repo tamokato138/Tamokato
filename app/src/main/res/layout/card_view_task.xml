@@ -9,55 +9,62 @@
     app:cardBackgroundColor="@color/cardview_light_background"
     app:cardCornerRadius="@dimen/card_view_task_radious">
 
-    <RelativeLayout
+    <LinearLayout
         style="@style/AlertDialog.AppCompat.Light"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/card_view_task_tv_title"
-            android:layout_width="wrap_content"
+        <CheckBox
+            android:id="@+id/card_view_task_chk_done"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/card_view_task_rd_done"
-            android:layout_toRightOf="@+id/card_view_task_rd_done"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/card_view_task_tv_title_size"
-            tools:text="Title" />
+            android:layout_margin="@dimen/card_view_task_chk_done_margin"
+            android:gravity="center_vertical" />
 
-        <TextView
-            android:id="@+id/card_view_task_tv_times_of_remind"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="8"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_view_task_tv_time"
-            android:layout_toEndOf="@+id/card_view_task_rd_done"
-            android:layout_toRightOf="@+id/card_view_task_rd_done"
-            android:textColor="@color/color_tv_time"
-            android:textSize="@dimen/card_view_task_tv_times_remind_size"
-            tools:text="every hour" />
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/card_view_task_rd_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/card_view_task_rd_done_margin" />
+            <TextView
+                android:id="@+id/card_view_task_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/card_view_task_tv_title_size"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/card_view_task_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_tv_time"
+                android:textSize="@dimen/card_view_task_tv_time_size"
+                tools:text="20/11/2016" />
+
+            <TextView
+                android:id="@+id/card_view_task_tv_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_tv_time"
+                android:textSize="@dimen/card_view_task_tv_priority"
+                tools:text="!!!!" />
+
+        </LinearLayout>
+
 
         <Switch
             android:id="@+id/card_view_task_sw_on_off_remind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_width="0dp"
+            android:layout_weight="2"
 
-        <TextView
-            android:id="@+id/card_view_task_tv_time"
-            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_view_task_tv_title"
-            android:layout_toEndOf="@+id/card_view_task_rd_done"
-            android:layout_toRightOf="@+id/card_view_task_rd_done"
-            android:textColor="@color/color_tv_time"
-            android:textSize="@dimen/card_view_task_tv_time_size"
-            tools:text="20/11/2016" />
-    </RelativeLayout>
+            />
+
+
+    </LinearLayout>
 </android.support.v7.widget.CardView>

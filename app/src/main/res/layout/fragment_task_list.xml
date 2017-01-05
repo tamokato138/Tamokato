@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fragment_task_list_btn_add_task_margin"
-        android:background="@drawable/btn_add_task_selector" />
+        android:background="@drawable/selector_btn_add_task" />
 
     <TextView
         android:id="@+id/fragment_task_list_tv_empty"

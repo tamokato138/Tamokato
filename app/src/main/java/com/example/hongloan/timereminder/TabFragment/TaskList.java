@@ -1,5 +1,6 @@
 package com.example.hongloan.timereminder.TabFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.hongloan.timereminder.Activity.AddNewTaskActivity;
 import com.example.hongloan.timereminder.Adapter.TaskListAdapter;
 import com.example.hongloan.timereminder.R;
 
@@ -32,6 +34,14 @@ public class TaskList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task_list, parent, false);
         getFormWidget(view);
         addListTask();
+
+        btnAddTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myintent = new Intent(getContext(), AddNewTaskActivity.class);
+                startActivity(myintent);
+            }
+        });
         return view;
     }
 
@@ -60,7 +70,6 @@ public class TaskList extends Fragment {
 
     private ArrayList<String> mockData() {
         mData = new ArrayList<String>();
-        mData.add("Đi học");
         mData.add("Đi chơi");
         mData.add("Ăn");
         mData.add("Đi học");
