@@ -64,7 +64,7 @@
             android:layout_height="@dimen/activity_add_new_task_fl_height">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/activity_add_new_task_img_date"
                 android:layout_width="@dimen/activity_add_new_task_img_width"
                 android:layout_height="@dimen/activity_add_new_task_img_height"
                 android:layout_gravity="center"
@@ -97,6 +97,7 @@
             android:layout_height="@dimen/activity_add_new_task_fl_height">
 
             <ImageView
+                android:id="@+id/activity_add_new_task_img_time"
                 android:layout_width="@dimen/activity_add_new_task_img_width"
                 android:layout_height="@dimen/activity_add_new_task_img_height"
                 android:layout_gravity="center"
@@ -130,6 +131,7 @@
             android:layout_height="@dimen/activity_add_new_task_fl_height">
 
             <ImageView
+                android:id="@+id/activity_add_new_task_img_priority"
                 android:layout_width="@dimen/activity_add_new_task_img_width"
                 android:layout_height="@dimen/activity_add_new_task_img_height"
                 android:layout_gravity="center"
@@ -138,25 +140,28 @@
 
 
         <RadioGroup
+            android:id="@+id/activity_add_new_task_rd_group_priority"
             android:layout_width="@dimen/activity_add_new_task_rd_group_width"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/activity_add_new_task_rd_priority_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="!" />
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/activity_add_new_task_rd_priority_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="!!" />
 
             <RadioButton
+                android:id="@+id/activity_add_new_task_rd_priority_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -164,6 +169,7 @@
         </RadioGroup>
 
         <ImageView
+            android:id="@+id/activity_add_new_task_img_on_off"
             android:layout_width="@dimen/activity_add_new_task_img_width"
             android:layout_height="@dimen/activity_add_new_task_img_height"
             android:layout_marginLeft="@dimen/activity_add_new_task_btn_on_off_margin_left"
