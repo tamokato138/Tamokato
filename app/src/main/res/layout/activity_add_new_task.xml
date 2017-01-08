@@ -29,7 +29,6 @@
             android:id="@+id/activity_add_new_task_edt_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/activity_add_new_task_edt_margin_left"
             android:hint="Title..."
             android:textColor="@android:color/black"
             android:textSize="18sp" />
@@ -46,7 +45,6 @@
             android:id="@+id/activity_add_new_task_edt_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/activity_add_new_task_edt_margin_left"
             android:hint="Detail..."
             android:textColor="@android:color/black"
             android:textSize="18sp" />
@@ -56,6 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -76,6 +75,7 @@
             android:id="@+id/activity_add_new_task_tv_date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
             android:gravity="center_vertical"
             android:textColor="@android:color/black"
@@ -172,7 +172,9 @@
             android:id="@+id/activity_add_new_task_img_on_off"
             android:layout_width="@dimen/activity_add_new_task_img_width"
             android:layout_height="@dimen/activity_add_new_task_img_height"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/activity_add_new_task_btn_on_off_margin_left"
             android:background="@drawable/ic_on_notif" />
     </LinearLayout>
+
 </LinearLayout>
