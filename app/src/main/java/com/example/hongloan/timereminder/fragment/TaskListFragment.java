@@ -1,4 +1,4 @@
-package com.example.hongloan.timereminder.TabFragment;
+package com.example.hongloan.timereminder.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.hongloan.timereminder.Activity.AddNewTaskActivity;
-import com.example.hongloan.timereminder.Adapter.TaskListAdapter;
+import com.example.hongloan.timereminder.activity.AddNewTaskActivity;
+import com.example.hongloan.timereminder.adapter.TaskListAdapter;
 import com.example.hongloan.timereminder.R;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Created by Hong Loan on 30/12/2016.
  */
 
-public class TaskList extends Fragment {
+public class TaskListFragment extends Fragment {
     RecyclerView recyclerView;
     TextView tvEmpty;
     ImageButton btnAddTask;
@@ -44,14 +44,19 @@ public class TaskList extends Fragment {
         });
         return view;
     }
+    public static TaskListFragment getInstance(){
+        TaskListFragment taskListFragment = new TaskListFragment();
+        return taskListFragment;
+    }
 
-    void getFormWidget(View view) {
+
+    public void getFormWidget(View view) {
         tvEmpty = (TextView) view.findViewById(R.id.fragment_task_list_tv_empty);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_task_list_recycler_view);
         btnAddTask = (ImageButton) view.findViewById(R.id.fragment_task_list_btn_add_task);
     }
 
-    void addListTask() {
+    public void addListTask() {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         TaskListAdapter adapter = new TaskListAdapter();

@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.hongloan.timereminder.Adapter.PagerAdapter;
+import com.example.hongloan.timereminder.adapter.PagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;

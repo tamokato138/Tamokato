@@ -1,4 +1,4 @@
-package com.example.hongloan.timereminder.Adapter;
+package com.example.hongloan.timereminder.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,6 +33,9 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+        if(mData==null){
+            return 0;
+        }
         return mData.size();
     }
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Reminder</string>
     <string name="fragment_task_list_tv_empty">Press a button below to add new Reminder!</string>
+<string name="add_new_task_toolbar_name">Add new task</string>
 </resources>

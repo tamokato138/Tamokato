@@ -1,4 +1,4 @@
-package com.example.hongloan.timereminder.Activity;
+package com.example.hongloan.timereminder.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +17,14 @@ public class AddNewTaskActivity extends AppCompatActivity {
         customToolbar();
     }
 
-    void getFormWidget() {
+    public void getFormWidget() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
     }
 
-    void customToolbar() {
+    public void customToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Add New Task");
+            getSupportActionBar().setTitle(getResources().getString(R.string.add_new_task_toolbar_name));
         }
     }
 }
