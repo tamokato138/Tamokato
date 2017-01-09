@@ -8,16 +8,16 @@ import java.util.Date;
 
 public class TaskDto {
     private String title;
-    private String descripton;
+    private String description;
     private Date date;
     private Date time;
     private int priority;
     private boolean isNotify;
     private boolean isDone;
 
-    public TaskDto(String title, String descripton, Date date, Date time, int priority, boolean isNotify, boolean isDone) {
+    public TaskDto(String title, String description, Date date, Date time, int priority, boolean isNotify, boolean isDone) {
         this.title = title;
-        this.descripton = descripton;
+        this.description = description;
         this.date = date;
         this.time = time;
         this.priority = priority;
@@ -33,12 +33,12 @@ public class TaskDto {
         this.title = title;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripton(String descripton) {
-        this.descripton = descripton;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getDate() {
