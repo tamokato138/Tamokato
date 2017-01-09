@@ -7,6 +7,7 @@ import java.util.Date;
  */
 
 public class TaskDto {
+    private int id;
     private String title;
     private String description;
     private Date date;
@@ -15,7 +16,11 @@ public class TaskDto {
     private boolean isNotify;
     private boolean isDone;
 
-    public TaskDto(String title, String description, Date date, Date time, int priority, boolean isNotify, boolean isDone) {
+    public TaskDto(){
+
+    }
+    public TaskDto(int id, String title, String description, Date date, Date time, int priority, boolean isNotify, boolean isDone) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
@@ -79,5 +84,13 @@ public class TaskDto {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
