@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.hongloan.timereminder.adapter.PagerAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     ViewPager viewPager;
     TabLayout tabLayout;
     PagerAdapter adapter;
@@ -36,11 +36,45 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public void customToolBar(){
+    public void customToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null){
-            getSupportActionBar().setTitle("Reminder");
+        viewPager.addOnPageChangeListener(this);
+    }
+
+    //setTitle for Toolbar when scroll
+    public void setTitleToolbar(String name) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(name);
         }
     }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        switch (position) {
+            case 0:
+                setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_task_list));
+                break;
+            case 1:
+                setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_undone_task));
+                break;
+            case 2:
+                setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_weather));
+                break;
+            case 3:
+                setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_location));
+                break;
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+//do Nothing
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+//do Nothing
+    }
 }
+

@@ -12,7 +12,7 @@ import com.example.hongloan.timereminder.R;
  * Created by Hong Loan on 30/12/2016.
  */
 
-public class GroupTaskListFragment extends Fragment {
+public class UndoneTaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -21,8 +21,8 @@ public class GroupTaskListFragment extends Fragment {
         return view;
     }
 
-    public static GroupTaskListFragment getInstance(){
-        GroupTaskListFragment groupTaskListFragment =new GroupTaskListFragment();
-        return groupTaskListFragment;
+    public static UndoneTaskFragment getInstance(){
+        UndoneTaskFragment undoneTaskFragment =new UndoneTaskFragment();
+        return undoneTaskFragment;
     }
 }
