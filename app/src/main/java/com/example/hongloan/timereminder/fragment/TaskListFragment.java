@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.hongloan.timereminder.R;
 import com.example.hongloan.timereminder.activity.AddNewTaskActivity;
 import com.example.hongloan.timereminder.adapter.TaskListAdapter;
-import com.example.hongloan.timereminder.R;
 
 import java.util.ArrayList;
 
@@ -21,12 +21,14 @@ import java.util.ArrayList;
  * Created by Hong Loan on 30/12/2016.
  */
 
-public class TaskListFragment extends Fragment {
+public class TaskListFragment extends Fragment implements View.OnClickListener {
     RecyclerView recyclerView;
     TextView tvEmpty;
     ImageButton btnAddTask;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<String> mData;
+
+    public static final int REQUEST_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -35,16 +37,11 @@ public class TaskListFragment extends Fragment {
         getFormWidget(view);
         addListTask();
 
-        btnAddTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myintent = new Intent(getContext(), AddNewTaskActivity.class);
-                startActivity(myintent);
-            }
-        });
+        btnAddTask.setOnClickListener(this);
         return view;
     }
-    public static TaskListFragment getInstance(){
+
+    public static TaskListFragment getInstance() {
         TaskListFragment taskListFragment = new TaskListFragment();
         return taskListFragment;
     }
@@ -75,21 +72,19 @@ public class TaskListFragment extends Fragment {
 
     private ArrayList<String> mockData() {
         mData = new ArrayList<String>();
-        mData.add("Đi chơi");
-        mData.add("Ăn");
-        mData.add("Đi học");
-        mData.add("Đi chơi");
-        mData.add("Ăn");
-        mData.add("Đi học");
-        mData.add("Đi chơi");
-        mData.add("Ăn");
-        mData.add("Đi học");
-        mData.add("Đi chơi");
-        mData.add("Ăn");
-        mData.add("Đi học");
-        mData.add("Đi chơi");
-        mData.add("Ăn");
         return mData;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), AddNewTaskActivity.class);
+        startActivityForResult(intent, 1);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
 

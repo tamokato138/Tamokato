@@ -15,6 +15,7 @@ public class AddNewTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_task);
         getFormWidget();
         customToolbar();
+
     }
 
     public void getFormWidget() {
