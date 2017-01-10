@@ -1,7 +1,5 @@
 package com.example.hongloan.timereminder.database;
 
-import java.util.Date;
-
 /**
  * Created by Hong Loan on 06/01/2017.
  */
@@ -10,8 +8,8 @@ public class TaskDto {
     private int id;
     private String title;
     private String description;
-    private Date date;
-    private Date time;
+    private String date;
+    private String time;
     private int priority;
     private boolean isNotify;
     private boolean isDone;
@@ -19,7 +17,7 @@ public class TaskDto {
     public TaskDto(){
 
     }
-    public TaskDto(int id, String title, String description, Date date, Date time, int priority, boolean isNotify, boolean isDone) {
+    public TaskDto(int id, String title, String description, String date, String time, int priority, boolean isNotify, boolean isDone) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -46,19 +44,19 @@ public class TaskDto {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

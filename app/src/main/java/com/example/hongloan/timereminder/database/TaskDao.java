@@ -24,11 +24,11 @@ public class TaskDao {
         ContentValues values = new ContentValues();
         values.put(Task.TaskEntry.COLUMN_TITLE, taskDto.getTitle());
         values.put(Task.TaskEntry.COLUMN_DESCRIPTION, taskDto.getDescription());
-        values.put(Task.TaskEntry.COLUMN_DATE, String.valueOf(taskDto.getDate()));
-        values.put(Task.TaskEntry.COLUMN_TIME, String.valueOf(taskDto.getTime()));
+        values.put(Task.TaskEntry.COLUMN_DATE, taskDto.getDate());
+        values.put(Task.TaskEntry.COLUMN_TIME, taskDto.getTime());
         values.put(Task.TaskEntry.COLUMN_PRIORITY, taskDto.getPriority());
-        values.put(Task.TaskEntry.COLUMN_IS_DONE, String.valueOf(taskDto.isDone()));
-        values.put(Task.TaskEntry.COLUMN_IS_NOTIFY, String.valueOf(taskDto.isNotify()));
+        values.put(Task.TaskEntry.COLUMN_IS_DONE, taskDto.isDone() ? 1 : 0);
+        values.put(Task.TaskEntry.COLUMN_IS_NOTIFY, taskDto.isNotify() ? 1 : 0);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         long newRowId = db.insert(Task.TaskEntry.TABLE_NAME, null, values);
         return newRowId;
@@ -53,6 +53,7 @@ public class TaskDao {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         String[] projection = {
                 Task.TaskEntry.COLUMN_TITLE,
+                Task.TaskEntry.COLUMN_DESCRIPTION,
                 Task.TaskEntry.COLUMN_DATE,
                 Task.TaskEntry.COLUMN_TIME,
                 Task.TaskEntry.COLUMN_PRIORITY,
@@ -77,9 +78,11 @@ public class TaskDao {
                 taskDto = new TaskDto();
                 taskDto.setTitle(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_TITLE)));
                 taskDto.setDescription(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_DESCRIPTION)));
+                taskDto.setDate(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_DATE)));
+                taskDto.setTime((cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_TIME))));
                 taskDto.setPriority(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_PRIORITY)));
-                taskDto.setDone(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_DONE))));
-                taskDto.setNotify(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_NOTIFY))));
+                taskDto.setDone(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_DONE)) == 1);
+                taskDto.setNotify(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_NOTIFY)) == 1);
                 list.add(taskDto);
             }
             return list;
