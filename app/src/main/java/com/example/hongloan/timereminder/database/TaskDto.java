@@ -1,10 +1,12 @@
 package com.example.hongloan.timereminder.database;
 
+import java.io.Serializable;
+
 /**
  * Created by Hong Loan on 06/01/2017.
  */
 
-public class TaskDto {
+public class TaskDto implements Serializable{
     private int id;
     private String title;
     private String description;

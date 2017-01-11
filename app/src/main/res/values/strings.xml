@@ -6,5 +6,7 @@
     <string name="main_activity_toolbar_title_undone_task">Undone Task</string>
     <string name="main_activity_toolbar_title_weather">Weather</string>
     <string name="main_activity_toolbar_title_location">Location</string>
+    <string name="menu_item_save">Save</string>
+    <string name="menu_item_cancel">Cancel</string>
 
 </resources>

@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         }
     }
 
+
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         switch (position) {

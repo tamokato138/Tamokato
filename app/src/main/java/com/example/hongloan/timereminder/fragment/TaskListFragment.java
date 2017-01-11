@@ -78,13 +78,14 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), AddNewTaskActivity.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, REQUEST_CODE);
 
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
     }
 }
 

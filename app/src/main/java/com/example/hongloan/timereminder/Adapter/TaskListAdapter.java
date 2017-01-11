@@ -9,6 +9,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.hongloan.timereminder.R;
+import com.example.hongloan.timereminder.database.TaskDto;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  */
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
-    ArrayList<String> mData;
+    ArrayList<TaskDto> mData;
 
     @Override
     public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,7 +29,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TaskListAdapter.ViewHolder holder, int position) {
-        holder.tvTitle.setText(mData.get(position));
+
     }
 
     @Override
@@ -56,7 +57,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     }
 
-    public void addDataToAdapter(ArrayList<String> mData) {
+    public void addDataToAdapter(ArrayList<TaskDto> mData) {
         this.mData = mData;
     }
 

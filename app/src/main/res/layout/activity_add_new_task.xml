@@ -14,43 +14,9 @@
         android:background="@color/color_toolbar"
         android:theme="@style/ToolBarStyle">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="@string/add_new_task_toolbar_name"
-                android:textColor="@android:color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/activity_add_new_task_btn_cancel"
-                    android:layout_width="@dimen/activity_add_new_task_toolbar_btn_width"
-                    android:layout_height="@dimen/activity_add_new_task_toolbar_btn_height"
-                    android:layout_marginLeft="@dimen/activity_add_new_task_toolbar_btn_cancel_margin_left"
-                    android:layout_marginTop="@dimen/activity_add_new_task_toolbar_btn_margin_top"
-                    android:background="@drawable/ic_unchecked" />
-
-                <ImageButton
-                    android:id="@+id/activity_add_new_task_btn_ok"
-                    android:layout_width="@dimen/activity_add_new_task_toolbar_btn_width"
-                    android:layout_height="@dimen/activity_add_new_task_toolbar_btn_height"
-                    android:layout_marginLeft="@dimen/activity_add_new_task_toolbar_btn_ok_margin_left"
-                    android:layout_marginTop="@dimen/activity_add_new_task_toolbar_btn_margin_top"
-                    android:background="@drawable/ic_checked" />
-            </LinearLayout>
-        </LinearLayout>
     </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -202,13 +168,14 @@
                 android:text="!!!" />
         </RadioGroup>
 
-        <ImageView
-            android:id="@+id/activity_add_new_task_img_on_off"
-            android:layout_width="@dimen/activity_add_new_task_img_width"
-            android:layout_height="@dimen/activity_add_new_task_img_height"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/activity_add_new_task_btn_on_off_margin_left"
-            android:background="@drawable/ic_on_notif" />
+        <CheckBox
+            android:button="@drawable/selector_checkbox_notify"
+            android:id="@+id/activity_add_new_task_chk_notify"
+            android:checked="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            />
     </LinearLayout>
 
 </LinearLayout>
