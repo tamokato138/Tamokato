@@ -34,21 +34,6 @@ public class TaskDao {
         return newRowId;
     }
 
-//    public long insert(final String title, String description, String date, String time, int priority, boolean isDone, boolean isNotify) {
-//        ContentValues values = new ContentValues();
-//        values.put(Task.TaskEntry.COLUMN_TITLE, title);
-//        values.put(Task.TaskEntry.COLUMN_DESCRIPTION, description);
-//        values.put(Task.TaskEntry.COLUMN_DATE, date);
-//        values.put(Task.TaskEntry.COLUMN_TIME, time);
-//        values.put(Task.TaskEntry.COLUMN_PRIORITY, priority);
-//        values.put(Task.TaskEntry.COLUMN_IS_DONE, isDone);
-//        values.put(Task.TaskEntry.COLUMN_IS_NOTIFY, isNotify);
-//
-//        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-//        long newRowId = db.insert(Task.TaskEntry.TABLE_NAME, null, values);
-//        return newRowId;
-//    }
-
     public ArrayList<TaskDto> loadAll() {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         String[] projection = {
@@ -85,6 +70,7 @@ public class TaskDao {
                 taskDto.setNotify(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_NOTIFY)) == 1);
                 list.add(taskDto);
             }
+            // FIXME Close cursor everytime
             return list;
         }
         return null;

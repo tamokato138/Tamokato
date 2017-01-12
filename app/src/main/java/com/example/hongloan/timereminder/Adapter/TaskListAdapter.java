@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
-    ArrayList<TaskDto> mData;
+    ArrayList<TaskDto> mData = new ArrayList<>();
 
     @Override
     public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,12 +29,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TaskListAdapter.ViewHolder holder, int position) {
-
+        holder.tvTitle.setText(mData.get(position).getTitle());
+        holder.tvTime.setText(mData.get(position).getDate());
+        holder.tvPriority.setText(showPriority(mData.get(position).getPriority()));
+        holder.swOnOff.setChecked(mData.get(position).isNotify());
     }
 
     @Override
     public int getItemCount() {
-        if(mData==null){
+        if (mData == null) {
             return 0;
         }
         return mData.size();
@@ -58,7 +61,24 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     }
 
     public void addDataToAdapter(ArrayList<TaskDto> mData) {
+        this.mData.clear();
         this.mData = mData;
+    }
+
+    private String showPriority(int priority) {
+        String p = "";
+        switch (priority) {
+            case 1:
+                p = "!";
+                break;
+            case 2:
+                p = "!!";
+                break;
+            case 3:
+                p = "!!!";
+                break;
+        }
+        return p;
     }
 
 }

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.example.hongloan.timereminder.R;
 import com.example.hongloan.timereminder.activity.AddNewTaskActivity;
 import com.example.hongloan.timereminder.adapter.TaskListAdapter;
+import com.example.hongloan.timereminder.database.TaskDao;
+import com.example.hongloan.timereminder.database.TaskDto;
 
 import java.util.ArrayList;
 
@@ -26,8 +28,8 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
     TextView tvEmpty;
     ImageButton btnAddTask;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<String> mData;
-
+    TaskListAdapter adapter;
+    ArrayList<TaskDto> mData = new ArrayList<>();
     public static final int REQUEST_CODE = 1;
 
     @Override
@@ -35,10 +37,14 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
         super.onCreateView(inflater, parent, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_task_list, parent, false);
         getFormWidget(view);
+        mockData();
         addListTask();
-
-        btnAddTask.setOnClickListener(this);
+        addEvents();
         return view;
+    }
+
+    private void addEvents() {
+        btnAddTask.setOnClickListener(this);
     }
 
     public static TaskListFragment getInstance() {
@@ -56,22 +62,22 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
     public void addListTask() {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        TaskListAdapter adapter = new TaskListAdapter();
-        adapter.addDataToAdapter(mockData());
         if (mData == null || mData.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             tvEmpty.setVisibility(View.VISIBLE);
         } else {
+            adapter = new TaskListAdapter();
+            adapter.addDataToAdapter(mockData());
             recyclerView.setVisibility(View.VISIBLE);
             tvEmpty.setVisibility(View.GONE);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
         }
     }
 
-    private ArrayList<String> mockData() {
-        mData = new ArrayList<String>();
+    private ArrayList<TaskDto> mockData() {
+        TaskDao taskDao = new TaskDao(getContext()); // FIXME Should use applicationContext
+        mData = taskDao.loadAll();
         return mData;
     }
 
@@ -85,7 +91,7 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        addListTask();
     }
 }
 
