@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class TaskDao {
         values.put(Task.TaskEntry.COLUMN_IS_NOTIFY, taskDto.isNotify() ? 1 : 0);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         long newRowId = db.insert(Task.TaskEntry.TABLE_NAME, null, values);
+        Log.d(getClass().getSimpleName() + " Loan", "insert: " + newRowId);
         return newRowId;
     }
 
@@ -45,7 +47,7 @@ public class TaskDao {
                 Task.TaskEntry.COLUMN_IS_DONE,
                 Task.TaskEntry.COLUMN_IS_NOTIFY,
         };
-        String sortOrder = Task.TaskEntry._ID + " ASC";
+        String sortOrder = Task.TaskEntry._ID + " DESC";
         Cursor cursor = db.query(
                 Task.TaskEntry.TABLE_NAME,
                 projection,
@@ -70,11 +72,12 @@ public class TaskDao {
                 taskDto.setNotify(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_NOTIFY)) == 1);
                 list.add(taskDto);
             }
-            // FIXME Close cursor everytime
+            Log.d(getClass().getSimpleName() + " Loan", "load data: "+ list.size());
+            cursor.close();
+            db.close();
             return list;
         }
         return null;
     }
-
 
 }

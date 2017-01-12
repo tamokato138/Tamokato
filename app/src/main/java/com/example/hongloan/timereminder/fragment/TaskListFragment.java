@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -19,11 +20,13 @@ import com.example.hongloan.timereminder.database.TaskDto;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Hong Loan on 30/12/2016.
  */
 
-public class TaskListFragment extends Fragment implements View.OnClickListener {
+public class TaskListFragment extends Fragment {
     RecyclerView recyclerView;
     TextView tvEmpty;
     ImageButton btnAddTask;
@@ -44,7 +47,7 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
     }
 
     private void addEvents() {
-        btnAddTask.setOnClickListener(this);
+        btnAddTask.setOnClickListener(new ItemEvents());
     }
 
     public static TaskListFragment getInstance() {
@@ -81,18 +84,32 @@ public class TaskListFragment extends Fragment implements View.OnClickListener {
         return mData;
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), AddNewTaskActivity.class);
-        startActivityForResult(intent, REQUEST_CODE);
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        addListTask();
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                mockData();
+                addListTask();
+            }
+        }
     }
+
+    public class ItemEvents implements AdapterView.OnItemLongClickListener, View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), AddNewTaskActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
+        }
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            return false;
+        }
+    }
+
 }
 
 

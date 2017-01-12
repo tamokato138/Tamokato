@@ -17,8 +17,9 @@ import java.util.ArrayList;
  * Created by Hong Loan on 03/01/2017.
  */
 
-public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder>{
     ArrayList<TaskDto> mData = new ArrayList<>();
+
 
     @Override
     public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,6 +34,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         holder.tvTime.setText(mData.get(position).getDate() + " - " + mData.get(position).getTime());
         holder.tvPriority.setText(showPriority(mData.get(position).getPriority()));
         holder.swOnOff.setChecked(mData.get(position).isNotify());
+
     }
 
     @Override
@@ -42,6 +44,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         }
         return mData.size();
     }
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,7 +64,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     }
 
     public void addDataToAdapter(ArrayList<TaskDto> mData) {
-        this.mData.clear();
         this.mData = mData;
     }
 

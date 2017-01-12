@@ -109,7 +109,6 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
 
         TaskDao taskDao = new TaskDao(getApplication());
         long userId = taskDao.insert(taskDto);
-        Log.d(getLocalClassName(), "insert " + userId);
         if (userId != -1) {
             Toast.makeText(this, "Task create successfully!", Toast.LENGTH_SHORT).show();
             Intent intent = getIntent();
