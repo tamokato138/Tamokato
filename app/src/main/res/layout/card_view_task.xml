@@ -19,13 +19,14 @@
             android:id="@+id/card_view_task_chk_done"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/card_view_task_chk_done_margin"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical|center_horizontal" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="8"
+            android:layout_margin="@dimen/card_view_task_content_margin"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 

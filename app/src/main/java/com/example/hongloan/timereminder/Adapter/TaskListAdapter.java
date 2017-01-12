@@ -30,7 +30,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     @Override
     public void onBindViewHolder(TaskListAdapter.ViewHolder holder, int position) {
         holder.tvTitle.setText(mData.get(position).getTitle());
-        holder.tvTime.setText(mData.get(position).getDate());
+        holder.tvTime.setText(mData.get(position).getDate() + " - " + mData.get(position).getTime());
         holder.tvPriority.setText(showPriority(mData.get(position).getPriority()));
         holder.swOnOff.setChecked(mData.get(position).isNotify());
     }
