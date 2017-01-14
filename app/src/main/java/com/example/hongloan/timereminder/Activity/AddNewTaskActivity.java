@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,7 +80,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
 
     }
@@ -89,11 +88,18 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
-        if (id == R.id.action_save) {
-            createTaskData();
-        }
-        if (id == R.id.action_cancel) {
-            finish();
+        switch (id) {
+            case R.id.action_save:
+                if (checkInputDataNotNull()) {
+                    createTaskData();
+                } else {
+                    Toast.makeText(this, "Please input data!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case R.id.action_cancel:
+                finish();
+                break;
         }
         return true;
     }
@@ -136,8 +142,12 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         tvDate.setText(simpleDateFormat.format(calendar.getTime()));
         simpleDateFormat = new SimpleDateFormat(timeFormat);
         tvTime.setText(simpleDateFormat.format(calendar.getTime()));
+
     }
 
+    private boolean checkInputDataNotNull() {
+        return !(edt_title.getText().toString().equals("")) && (rdPriority1.isChecked() || rdPriority2.isChecked() || rdPriority3.isChecked());
+    }
 
     @Override
     public void onClick(View v) {

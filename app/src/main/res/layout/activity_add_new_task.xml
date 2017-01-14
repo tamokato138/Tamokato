@@ -1,181 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    android:weightSum="10">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/color_toolbar"
-        android:theme="@style/ToolBarStyle">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:weightSum="10">
 
-
-    </android.support.v7.widget.Toolbar>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
-        android:layout_weight="1.5"
-        android:orientation="horizontal">
-
-
-        <EditText
-            android:id="@+id/activity_add_new_task_edt_title"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Title..."
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </LinearLayout>
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/color_toolbar"
+            android:theme="@style/ToolBarStyle">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="horizontal">
+        </android.support.v7.widget.Toolbar>
 
-        <EditText
-            android:id="@+id/activity_add_new_task_edt_description"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Detail..."
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:layout_width="@dimen/activity_add_new_task_fl_width"
-            android:layout_height="@dimen/activity_add_new_task_fl_height">
-
-            <ImageView
-                android:id="@+id/activity_add_new_task_img_date"
-                android:layout_width="@dimen/activity_add_new_task_img_width"
-                android:layout_height="@dimen/activity_add_new_task_img_height"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_calendar" />
-        </FrameLayout>
-
-
-        <TextView
-            android:id="@+id/activity_add_new_task_tv_date"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
-            android:gravity="center_vertical"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            tools:text="12/11/2016" />
-    </LinearLayout>
-
-    <View style="@style/ViewLineStyle" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:layout_width="@dimen/activity_add_new_task_fl_width"
-            android:layout_height="@dimen/activity_add_new_task_fl_height">
-
-            <ImageView
-                android:id="@+id/activity_add_new_task_img_time"
-                android:layout_width="@dimen/activity_add_new_task_img_width"
-                android:layout_height="@dimen/activity_add_new_task_img_height"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_alarm_clock" />
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/activity_add_new_task_tv_time"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
-            android:layout_weight="5"
-            android:gravity="center_vertical"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            tools:text="13:05" />
-    </LinearLayout>
-
-    <View style="@style/ViewLineStyle" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:layout_width="@dimen/activity_add_new_task_fl_width"
-            android:layout_height="@dimen/activity_add_new_task_fl_height">
-
-            <ImageView
-                android:id="@+id/activity_add_new_task_img_priority"
-                android:layout_width="@dimen/activity_add_new_task_img_width"
-                android:layout_height="@dimen/activity_add_new_task_img_height"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_priority" />
-        </FrameLayout>
-
-
-        <RadioGroup
-            android:id="@+id/activity_add_new_task_rd_group_priority"
-            android:layout_width="@dimen/activity_add_new_task_rd_group_width"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
+            android:layout_weight="1.5"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/activity_add_new_task_rd_priority_1"
+
+            <EditText
+                android:id="@+id/activity_add_new_task_edt_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:hint="Title..."
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+
+            <requestFocus></requestFocus>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/activity_add_new_task_edt_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Detail..."
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="@dimen/activity_add_new_task_fl_width"
+                android:layout_height="@dimen/activity_add_new_task_fl_height">
+
+                <ImageView
+                    android:id="@+id/activity_add_new_task_img_date"
+                    android:layout_width="@dimen/activity_add_new_task_img_width"
+                    android:layout_height="@dimen/activity_add_new_task_img_height"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_calendar" />
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/activity_add_new_task_tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:text="12/11/2016" />
+        </LinearLayout>
+
+        <View style="@style/ViewLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="@dimen/activity_add_new_task_fl_width"
+                android:layout_height="@dimen/activity_add_new_task_fl_height">
+
+                <ImageView
+                    android:id="@+id/activity_add_new_task_img_time"
+                    android:layout_width="@dimen/activity_add_new_task_img_width"
+                    android:layout_height="@dimen/activity_add_new_task_img_height"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_alarm_clock" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/activity_add_new_task_tv_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:text="13:05" />
+        </LinearLayout>
+
+        <View style="@style/ViewLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_add_new_task_margin_top"
+            android:layout_weight="1.5
+            "
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="@dimen/activity_add_new_task_fl_width"
+                android:layout_height="@dimen/activity_add_new_task_fl_height"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/activity_add_new_task_img_priority"
+                    android:layout_width="@dimen/activity_add_new_task_img_width"
+                    android:layout_height="@dimen/activity_add_new_task_img_height"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_priority" />
+            </FrameLayout>
+
+
+            <RadioGroup
+                android:id="@+id/activity_add_new_task_rd_group_priority"
+                android:layout_width="@dimen/activity_add_new_task_rd_group_width"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_add_new_task_margin_left"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/activity_add_new_task_rd_priority_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="!" />
+
+                <RadioButton
+                    android:id="@+id/activity_add_new_task_rd_priority_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="!!" />
+
+                <RadioButton
+                    android:id="@+id/activity_add_new_task_rd_priority_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="!!!" />
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/activity_add_new_task_chk_notify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="!" />
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginLeft="@dimen/activity_add_new_task_edt_margin_left"
+                android:button="@drawable/selector_checkbox_notify"
+                android:checked="true"
 
-            <RadioButton
-                android:id="@+id/activity_add_new_task_rd_priority_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="!!" />
+                />
+        </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/activity_add_new_task_rd_priority_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="!!!" />
-        </RadioGroup>
-
-        <CheckBox
-            android:button="@drawable/selector_checkbox_notify"
-            android:id="@+id/activity_add_new_task_chk_notify"
-            android:checked="true"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-
-            />
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

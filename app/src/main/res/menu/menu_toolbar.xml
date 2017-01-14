@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_unchecked"
         android:orderInCategory="2"
         android:showAsAction="ifRoom"
-        android:title="@string/menu_item_cancel">
+        android:title="@string/menu_toolbar_item_cancel">
 
     </item>
     <item
@@ -13,6 +13,6 @@
         android:icon="@drawable/ic_checked"
         android:orderInCategory="1"
         android:showAsAction="ifRoom"
-        android:title="@string/menu_item_save">
+        android:title="@string/menu_toolbar_item_save">
     </item>
 </menu>

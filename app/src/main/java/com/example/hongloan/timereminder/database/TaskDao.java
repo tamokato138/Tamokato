@@ -32,6 +32,7 @@ public class TaskDao {
         values.put(Task.TaskEntry.COLUMN_IS_NOTIFY, taskDto.isNotify() ? 1 : 0);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         long newRowId = db.insert(Task.TaskEntry.TABLE_NAME, null, values);
+        db.close();
         Log.d(getClass().getSimpleName() + " Loan", "insert: " + newRowId);
         return newRowId;
     }
@@ -60,7 +61,6 @@ public class TaskDao {
         if (cursor != null) {
             ArrayList<TaskDto> list = new ArrayList<TaskDto>();
             TaskDto taskDto;
-            cursor.moveToFirst();
             while (cursor.moveToNext()) {
                 taskDto = new TaskDto();
                 taskDto.setTitle(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_TITLE)));
@@ -72,12 +72,20 @@ public class TaskDao {
                 taskDto.setNotify(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_NOTIFY)) == 1);
                 list.add(taskDto);
             }
-            Log.d(getClass().getSimpleName() + " Loan", "load data: "+ list.size());
+            Log.d(getClass().getSimpleName() + " Loan", "load data: "  + " " + list.size());
             cursor.close();
             db.close();
             return list;
         }
         return null;
+    }
+
+    public void deleteRow(int position) {
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        String selection = Task.TaskEntry._ID +" = " + String.valueOf(position+1);
+        db.delete(Task.TaskEntry.TABLE_NAME, selection,null);
+        db.close();
+
     }
 
 }
