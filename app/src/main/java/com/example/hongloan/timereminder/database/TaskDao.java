@@ -40,6 +40,7 @@ public class TaskDao {
     public ArrayList<TaskDto> loadAll() {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         String[] projection = {
+                Task.TaskEntry._ID,
                 Task.TaskEntry.COLUMN_TITLE,
                 Task.TaskEntry.COLUMN_DESCRIPTION,
                 Task.TaskEntry.COLUMN_DATE,
@@ -63,6 +64,7 @@ public class TaskDao {
             TaskDto taskDto;
             while (cursor.moveToNext()) {
                 taskDto = new TaskDto();
+                taskDto.setId(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry._ID)));
                 taskDto.setTitle(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_TITLE)));
                 taskDto.setDescription(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_DESCRIPTION)));
                 taskDto.setDate(cursor.getString(cursor.getColumnIndex(Task.TaskEntry.COLUMN_DATE)));
@@ -72,7 +74,7 @@ public class TaskDao {
                 taskDto.setNotify(cursor.getInt(cursor.getColumnIndex(Task.TaskEntry.COLUMN_IS_NOTIFY)) == 1);
                 list.add(taskDto);
             }
-            Log.d(getClass().getSimpleName() + " Loan", "load data: "  + " " + list.size());
+            Log.d(getClass().getSimpleName() + " Loan", "load data: " + " " + list.size());
             cursor.close();
             db.close();
             return list;
@@ -80,12 +82,37 @@ public class TaskDao {
         return null;
     }
 
-    public void deleteRow(int position) {
+    public void deleteRow(int taskId) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String selection = Task.TaskEntry._ID +" = " + String.valueOf(position+1);
-        db.delete(Task.TaskEntry.TABLE_NAME, selection,null);
+        String selection = Task.TaskEntry._ID + " = " + String.valueOf(taskId);
+        int rowId = db.delete(Task.TaskEntry.TABLE_NAME, selection, null);
+        Log.d(getClass().getSimpleName(), " deleteRow: " + rowId);
         db.close();
 
+    }
+
+    public int updateRowEdit(TaskDto taskDto, int taskId) {
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+// New value for one column
+        ContentValues values = new ContentValues();
+        values.put(Task.TaskEntry.COLUMN_TITLE, taskDto.getTitle());
+        values.put(Task.TaskEntry.COLUMN_DESCRIPTION, taskDto.getDescription());
+        values.put(Task.TaskEntry.COLUMN_DATE, taskDto.getDate());
+        values.put(Task.TaskEntry.COLUMN_TIME, taskDto.getTime());
+        values.put(Task.TaskEntry.COLUMN_PRIORITY, taskDto.getPriority());
+        values.put(Task.TaskEntry.COLUMN_IS_DONE, taskDto.isDone() ? 1 : 0);
+        values.put(Task.TaskEntry.COLUMN_IS_NOTIFY, taskDto.isNotify() ? 1 : 0);
+
+// Which row to update, based on the title
+        String selection = Task.TaskEntry._ID + " = " + String.valueOf(taskId);
+        int count = db.update(
+                Task.TaskEntry.TABLE_NAME,
+                values,
+                selection,
+                null);
+        db.close();
+        return count;
     }
 
 }

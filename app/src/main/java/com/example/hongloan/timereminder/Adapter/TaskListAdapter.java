@@ -1,6 +1,5 @@
 package com.example.hongloan.timereminder.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -9,7 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -25,14 +24,10 @@ import java.util.ArrayList;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
     ArrayList<TaskDto> mData = new ArrayList<>();
-    Context context;
+
     private OnAdapterListener onAdapterListener;
-    private int selectedPosition;
+    private int selectedPosition = -1;
 
-
-    public TaskListAdapter(Context context) {
-        this.context = context;
-    }
 
     public void setOnAdapterListener(OnAdapterListener onAdapterListener) {
         this.onAdapterListener = onAdapterListener;
@@ -54,6 +49,31 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         holder.tvTime.setText(mData.get(position).getDate() + " - " + mData.get(position).getTime());
         holder.tvPriority.setText(showPriority(mData.get(position).getPriority()));
         holder.swOnOff.setChecked(mData.get(position).isNotify());
+        holder.swOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (holder.swOnOff.isChecked()) {
+                    onAdapterListener.onAdapterOnSwitchListener();
+                    setSelectedPosition(position);
+                } else {
+                    onAdapterListener.onAdapterOffSwitchListener();
+                    setSelectedPosition(position);
+                }
+            }
+        });
+
+        holder.chkDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (holder.chkDone.isChecked()) {
+                    onAdapterListener.onAdapterOnCheckIsDoneListener();
+                    setSelectedPosition(position);
+                } else {
+                    onAdapterListener.onAdapterOnCheckNotDoneListener();
+                    setSelectedPosition(position);
+                }
+            }
+        });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -62,7 +82,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 return false;
             }
         });
-
 
 
     }
@@ -85,22 +104,28 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         this.selectedPosition = selectedPosition;
     }
 
+    public TaskDto getItemByPosition(int selectedPosition) {
+        if (selectedPosition != -1) {
+            return mData.get(getSelectedPosition());
+        } else {
+            return null;
+        }
+    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         CheckBox chkDone;
         TextView tvTitle, tvTime, tvPriority;
         Switch swOnOff;
-        LinearLayout llContainer;
 
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView) {
             super(itemView);
             chkDone = (CheckBox) itemView.findViewById(R.id.card_view_task_chk_done);
             tvTime = (TextView) itemView.findViewById(R.id.card_view_task_tv_time);
             tvTitle = (TextView) itemView.findViewById(R.id.card_view_task_tv_title);
             tvPriority = (TextView) itemView.findViewById(R.id.card_view_task_tv_priority);
             swOnOff = (Switch) itemView.findViewById(R.id.card_view_task_sw_on_off_remind);
-            llContainer = (LinearLayout) itemView.findViewById(R.id.card_view_task_ll_container);
             itemView.setOnCreateContextMenuListener(this);
 
         }

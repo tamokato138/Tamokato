@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.hongloan.timereminder.R;
 import com.example.hongloan.timereminder.activity.AddNewTaskActivity;
+import com.example.hongloan.timereminder.activity.EditTaskActivity;
 import com.example.hongloan.timereminder.adapter.TaskListAdapter;
 import com.example.hongloan.timereminder.database.TaskDao;
 import com.example.hongloan.timereminder.database.TaskDto;
@@ -36,7 +37,8 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
     RecyclerView.LayoutManager layoutManager;
     TaskListAdapter adapter;
     FrameLayout container;
-    public static final int REQUEST_CODE = 1;
+    public static final int REQUEST_CODE_ADD_NEW = 1;
+    public static final int REQUEST_CODE_EDIT = 2;
 
 
     @Override
@@ -44,7 +46,7 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         super.onCreateView(inflater, parent, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_task_list, parent, false);
         getFormWidget(view);
-        adapter = new TaskListAdapter(getContext());
+        adapter = new TaskListAdapter();
         recyclerView.setAdapter(adapter);
         loadData();
         displayView();
@@ -96,7 +98,13 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == REQUEST_CODE_ADD_NEW) {
+            if (resultCode == RESULT_OK) {
+                loadData();
+                displayView();
+            }
+        }
+        if (requestCode == REQUEST_CODE_EDIT) {
             if (resultCode == RESULT_OK) {
                 loadData();
                 displayView();
@@ -105,36 +113,66 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
     }
 
     public class ItemEvents implements OnAdapterListener, View.OnClickListener {
+
+        TaskDto item = adapter.getItemByPosition(adapter.getSelectedPosition());
+        TaskDao taskDao =new TaskDao(getActivity().getApplicationContext());
+
+
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getContext(), AddNewTaskActivity.class);
-            startActivityForResult(intent, REQUEST_CODE);
+            startActivityForResult(intent, REQUEST_CODE_ADD_NEW);
         }
 
+        @Override
+        public void onAdapterOnSwitchListener() {
+            item.setNotify(true);
+
+            Toast.makeText(getContext(), "Turn on notification!", Toast.LENGTH_SHORT).show();
+        }
 
         @Override
-        public void onAdapterSwitchListener(int position) {
+        public void onAdapterOffSwitchListener() {
+            item.setNotify(false);
+            Toast.makeText(getContext(), "Turn off notification!", Toast.LENGTH_SHORT).show();
 
+        }
+
+        @Override
+        public void onAdapterOnCheckIsDoneListener() {
+            item.setDone(true);
+            Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onAdapterOnCheckNotDoneListener() {
+            item.setDone(false);
         }
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem menuItem) {
+    public boolean onContextItemSelected(MenuItem menuItem) throws NullPointerException {
+        TaskDto item = adapter.getItemByPosition(adapter.getSelectedPosition());
+        TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
         switch (menuItem.getItemId()) {
             case R.id.action_delete:
-                TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
-                taskDao.deleteRow(adapter.getSelectedPosition());
+                if (item != null)
+                    taskDao.deleteRow(item.getId());
                 Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
                 loadData();
                 displayView();
                 break;
             case R.id.action_edit:
-                Toast.makeText(getContext(), "Edit!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), EditTaskActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_EDIT);
                 break;
 
         }
         return super.onContextItemSelected(menuItem);
+
     }
+
+
 }
 
 

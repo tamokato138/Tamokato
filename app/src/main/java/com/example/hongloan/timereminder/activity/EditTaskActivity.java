@@ -26,7 +26,7 @@ import com.example.hongloan.timereminder.database.TaskDto;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class AddNewTaskActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditTaskActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar toolbar;
     EditText edt_title, edt_description;
     ImageView imgDate, imgTime;
@@ -45,10 +45,34 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_add_new_task);
         getFormWidget();
         customToolbar();
-        getDefaultInfo();
+//        getDefaultData();
         addEvents();
 
     }
+
+//    private void getDefaultData() {
+//        TaskListAdapter adapter = new TaskListAdapter();
+//        TaskDao taskDao = new TaskDao(getApplicationContext());
+//        ArrayList<TaskDto> list = taskDao.loadAll();
+//        TaskDto taskItem = list.get(adapter.getSelectedPosition());
+//        edt_title.setText(taskItem.getTitle());
+//        edt_description.setText(taskItem.getDescription());
+//        tvDate.setText(taskItem.getDate());
+//        tvTime.setText(taskItem.getTime());
+//        chkNotify.setChecked(taskItem.isNotify());
+//        switch (taskItem.getPriority()) {
+//            case 1:
+//                rdPriority1.isChecked();
+//                break;
+//            case 2:
+//                rdPriority2.isChecked();
+//                break;
+//            case 3:
+//                rdPriority3.isChecked();
+//                break;
+//        }
+//
+//    }
 
     private void addEvents() {
         imgDate.setOnClickListener(this);
@@ -74,7 +98,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
     private void customToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.add_new_task_toolbar_name));
+            getSupportActionBar().setTitle(getResources().getString(R.string.edit_task_toolbar_name));
         }
     }
 
@@ -91,7 +115,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         switch (id) {
             case R.id.action_save:
                 if (checkInputDataNotNull()) {
-                    createTaskData();
+                    updateTask();
                 } else {
                     Toast.makeText(this, "Please input data!", Toast.LENGTH_SHORT).show();
                 }
@@ -104,7 +128,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         return true;
     }
 
-    private void createTaskData() {
+    private void updateTask() {
         TaskDto taskDto = new TaskDto();
         taskDto.setTitle(edt_title.getText().toString());
         taskDto.setDescription(edt_description.getText().toString());
@@ -115,9 +139,9 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         taskDto.setDone(false);
 
         TaskDao taskDao = new TaskDao(getApplication());
-        long userId = taskDao.insert(taskDto);
+        long userId = taskDao.updateRowEdit(taskDto, taskDto.getId());
         if (userId != -1) {
-            Toast.makeText(this, "Task create successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Task updated successfully!", Toast.LENGTH_SHORT).show();
             Intent intent = getIntent();
             setResult(RESULT_OK, intent);
             finish();
@@ -138,13 +162,6 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         return priority;
     }
 
-    private void getDefaultInfo() {
-        simpleDateFormat = new SimpleDateFormat(dateFormat);
-        tvDate.setText(simpleDateFormat.format(calendar.getTime()));
-        simpleDateFormat = new SimpleDateFormat(timeFormat);
-        tvTime.setText(simpleDateFormat.format(calendar.getTime()));
-
-    }
 
     private boolean checkInputDataNotNull() {
         return !(edt_title.getText().toString().equals("")) && (rdPriority1.isChecked() || rdPriority2.isChecked() || rdPriority3.isChecked());
