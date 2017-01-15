@@ -48,30 +48,52 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         holder.tvTitle.setText(mData.get(position).getTitle());
         holder.tvTime.setText(mData.get(position).getDate() + " - " + mData.get(position).getTime());
         holder.tvPriority.setText(showPriority(mData.get(position).getPriority()));
+        holder.chkDone.setChecked(mData.get(position).isDone());
         holder.swOnOff.setChecked(mData.get(position).isNotify());
-        holder.swOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.swOnOff.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (holder.swOnOff.isChecked()) {
-                    onAdapterListener.onAdapterOnSwitchListener();
-                    setSelectedPosition(position);
-                } else {
-                    onAdapterListener.onAdapterOffSwitchListener();
-                    setSelectedPosition(position);
-                }
+            public void onClick(View v) {
+                setSelectedPosition(position);
+                boolean isChecked = ((Switch) v).isChecked();
+                holder.swOnOff.setChecked(isChecked);
+                onAdapterListener.onAdapterOnSwitchListener(isChecked);
             }
         });
+        holder.chkDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSelectedPosition(position);
+                boolean isDone = ((CheckBox) v).isChecked();
+                holder.chkDone.setChecked(isDone);
+                onAdapterListener.onAdapterOnCheckIsDoneListener(isDone);
+            }
+        });
+//        holder.swOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+////                if (holder.swOnOff.isChecked()) {
+////                    setSelectedPosition(position);
+////                    onAdapterListener.onAdapterOnSwitchListener();
+////                } else {
+////                    setSelectedPosition(position);
+////                    onAdapterListener.onAdapterOffSwitchListener();
+////                }
+//            }
+//        });
 
         holder.chkDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (holder.chkDone.isChecked()) {
-                    onAdapterListener.onAdapterOnCheckIsDoneListener();
-                    setSelectedPosition(position);
-                } else {
-                    onAdapterListener.onAdapterOnCheckNotDoneListener();
-                    setSelectedPosition(position);
-                }
+                setSelectedPosition(position);
+                onAdapterListener.onAdapterOnCheckIsDoneListener(isChecked);
+//                if (holder.chkDone.isChecked()) {
+//                    setSelectedPosition(position);
+//                    onAdapterListener.onAdapterOnCheckIsDoneListener();
+//                } else {
+//                    setSelectedPosition(position);
+//                    onAdapterListener.onAdapterOnCheckNotDoneListener();
+//                }
             }
         });
 

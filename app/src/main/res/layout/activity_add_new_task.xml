@@ -185,9 +185,7 @@
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginLeft="@dimen/activity_add_new_task_edt_margin_left"
                 android:button="@drawable/selector_checkbox_notify"
-                android:checked="true"
-
-                />
+                android:checked="true" />
         </LinearLayout>
 
     </LinearLayout>

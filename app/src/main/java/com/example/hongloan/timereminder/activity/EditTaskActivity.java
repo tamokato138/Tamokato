@@ -38,6 +38,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     String dateFormat = "dd/MM/yyyy";
     String timeFormat = "HH:mm";
     SimpleDateFormat simpleDateFormat;
+    int taskId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,34 +46,38 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_add_new_task);
         getFormWidget();
         customToolbar();
-//        getDefaultData();
+        getDefaultInfo();
+        getDefaultData();
         addEvents();
 
     }
 
-//    private void getDefaultData() {
-//        TaskListAdapter adapter = new TaskListAdapter();
-//        TaskDao taskDao = new TaskDao(getApplicationContext());
-//        ArrayList<TaskDto> list = taskDao.loadAll();
-//        TaskDto taskItem = list.get(adapter.getSelectedPosition());
-//        edt_title.setText(taskItem.getTitle());
-//        edt_description.setText(taskItem.getDescription());
-//        tvDate.setText(taskItem.getDate());
-//        tvTime.setText(taskItem.getTime());
-//        chkNotify.setChecked(taskItem.isNotify());
-//        switch (taskItem.getPriority()) {
-//            case 1:
-//                rdPriority1.isChecked();
-//                break;
-//            case 2:
-//                rdPriority2.isChecked();
-//                break;
-//            case 3:
-//                rdPriority3.isChecked();
-//                break;
-//        }
-//
-//    }
+    private void getDefaultData() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("my_package");
+        TaskDto item = (TaskDto) bundle.getSerializable("item");
+        if (item != null) {
+            taskId = item.getId();
+            edt_title.setText(item.getTitle());
+            edt_description.setText(item.getDescription());
+            tvDate.setText(item.getDate());
+            tvTime.setText(item.getTime());
+
+            chkNotify.setChecked(item.isNotify());
+            switch (item.getPriority()) {
+                case 1:
+                    rdPriority1.setChecked(true);
+                    break;
+                case 2:
+                    rdPriority2.setChecked(true);
+                    break;
+                case 3:
+                    rdPriority3.setChecked(true);
+                    break;
+            }
+        }
+    }
+
 
     private void addEvents() {
         imgDate.setOnClickListener(this);
@@ -102,6 +107,15 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void getDefaultInfo() {
+        simpleDateFormat = new SimpleDateFormat(dateFormat);
+        tvDate.setText(simpleDateFormat.format(calendar.getTime()));
+        simpleDateFormat = new SimpleDateFormat(timeFormat);
+        tvTime.setText(simpleDateFormat.format(calendar.getTime()));
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
@@ -130,13 +144,13 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
 
     private void updateTask() {
         TaskDto taskDto = new TaskDto();
+        taskDto.setId(taskId);
         taskDto.setTitle(edt_title.getText().toString());
         taskDto.setDescription(edt_description.getText().toString());
         taskDto.setDate(tvDate.getText().toString());
         taskDto.setTime(tvTime.getText().toString());
         taskDto.setPriority(getPriorityRadioBtn());
         taskDto.setNotify(chkNotify.isChecked());
-        taskDto.setDone(false);
 
         TaskDao taskDao = new TaskDao(getApplication());
         long userId = taskDao.updateRowEdit(taskDto, taskDto.getId());

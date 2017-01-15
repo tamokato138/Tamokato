@@ -5,8 +5,10 @@ package com.example.hongloan.timereminder.interfaces;
  */
 
 public interface OnAdapterListener {
-    void onAdapterOnSwitchListener();
-    void onAdapterOffSwitchListener();
-    void onAdapterOnCheckIsDoneListener();
-    void onAdapterOnCheckNotDoneListener();
+    void onAdapterOnSwitchListener(final boolean isChecked);
+//    void onAdapterOnSwitchListener();
+//    void onAdapterOffSwitchListener();
+    void onAdapterOnCheckIsDoneListener(final boolean isChecked);
+//    void onAdapterOnCheckIsDoneListener();
+//    void onAdapterOnCheckNotDoneListener();
 }
