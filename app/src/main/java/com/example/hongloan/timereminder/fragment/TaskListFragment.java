@@ -134,7 +134,7 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
             final int itemId = item.getId();
             TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
             taskDao.updateNotify(itemId, isChecked);
-            Toast.makeText(getContext(), "Updated notification!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Notification changed!", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -146,7 +146,7 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
             final int itemId = item.getId();
             TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
             taskDao.updateDone(itemId, isChecked);
-            Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT).show();
         }
 
 

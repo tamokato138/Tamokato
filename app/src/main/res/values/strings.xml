@@ -12,5 +12,6 @@
     <string name="menu_toolbar_item_cancel">Cancel</string>
     <string name="menu_context_item_delete">Delete</string>
     <string name="menu_context_item_edit">Edit</string>
+    <string name="fragment_undone_task_tv_empty">All done!</string>
 
 </resources>
