@@ -2,9 +2,11 @@ package com.example.hongloan.timereminder.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +22,7 @@ import com.example.hongloan.timereminder.activity.EditTaskActivity;
 import com.example.hongloan.timereminder.adapter.TaskListAdapter;
 import com.example.hongloan.timereminder.database.TaskDao;
 import com.example.hongloan.timereminder.database.TaskDto;
-import com.example.hongloan.timereminder.interfaces.OnAdapterListener;
+import com.example.hongloan.timereminder.interfaces.OnTaskListAdapterListener;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,8 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
     RecyclerView.LayoutManager layoutManager;
     TaskListAdapter adapter;
     FrameLayout container;
+
+
     public static final int REQUEST_CODE_ADD_NEW = 1;
     public static final int REQUEST_CODE_EDIT = 2;
 
@@ -57,7 +61,7 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
 
     private void addEvents() {
         btnAddTask.setOnClickListener(new ItemEvents());
-        adapter.setOnAdapterListener(new ItemEvents());
+        adapter.setOnTaskListAdapterListener(new ItemEvents());
     }
 
     public static TaskListFragment getInstance() {
@@ -98,26 +102,23 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         loadData();
         displayView();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ADD_NEW) {
             if (resultCode == RESULT_OK) {
                 reloadData();
-//                loadData();
-//                displayView();
             }
         }
         if (requestCode == REQUEST_CODE_EDIT) {
             if (resultCode == RESULT_OK) {
                 reloadData();
-//                loadData();
-//                displayView();
             }
         }
     }
 
-    public class ItemEvents implements OnAdapterListener, View.OnClickListener {
+    public class ItemEvents implements OnTaskListAdapterListener, View.OnClickListener {
 
         @Override
         public void onClick(View v) {
@@ -126,11 +127,10 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         }
 
         @Override
-        public void onAdapterOnSwitchListener(boolean isChecked) {
+        public void onTaskListAdapterSwitchListener(boolean isChecked) {
             final int pos = adapter.getSelectedPosition();
             TaskDto item = adapter.getItemByPosition(pos);
             item.setNotify(isChecked);
-            adapter.notifyDataSetChanged();
             final int itemId = item.getId();
             TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
             taskDao.updateNotify(itemId, isChecked);
@@ -138,57 +138,25 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         }
 
         @Override
-        public void onAdapterOnCheckIsDoneListener(boolean isChecked) {
+        public void onTaskListAdapterCheckIsDoneListener(boolean isChecked) {
             final int pos = adapter.getSelectedPosition();
             TaskDto item = adapter.getItemByPosition(pos);
             item.setDone(isChecked);
-            adapter.notifyDataSetChanged();
             final int itemId = item.getId();
             TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
             taskDao.updateDone(itemId, isChecked);
+            ArrayList<TaskDto> data = taskDao.loadAll();
+            adapter.addDataToAdapter(data);
+            Handler handler = new Handler();
+            final Runnable r = new Runnable() {
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                }
+            };
+            handler.post(r);
             Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT).show();
         }
 
-
-//        @Override
-//        public void onAdapterOnSwitchListener() {
-//            final int pos = adapter.getSelectedPosition();
-//            TaskDto item = adapter.getItemByPosition(pos);
-//            item.setNotify(true);
-//            TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
-//            taskDao.updateRowEdit(item, pos);
-//            Toast.makeText(getContext(), "Turn on notification!", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        @Override
-//        public void onAdapterOffSwitchListener() {
-//            final int pos = adapter.getSelectedPosition();
-//            TaskDto item = adapter.getItemByPosition(pos);
-//            item.setNotify(false);
-//            TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
-//            taskDao.updateRowEdit(item, pos);
-//            Toast.makeText(getContext(), "Turn off notification!", Toast.LENGTH_SHORT).show();
-//
-//        }
-//
-//        @Override
-//        public void onAdapterOnCheckIsDoneListener() {
-//            final int pos = adapter.getSelectedPosition();
-//            TaskDto item = adapter.getItemByPosition(pos);
-//            item.setDone(true);
-//            TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
-//            taskDao.updateRowEdit(item, pos);
-//            Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        @Override
-//        public void onAdapterOnCheckNotDoneListener() {
-//            final int pos = adapter.getSelectedPosition();
-//            TaskDto item = adapter.getItemByPosition(pos);
-//            item.setDone(false);
-//            TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
-//            taskDao.updateRowEdit(item, pos);
-//        }
     }
 
     @Override
@@ -196,19 +164,20 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         TaskDto item = adapter.getItemByPosition(adapter.getSelectedPosition());
         TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
         switch (menuItem.getItemId()) {
-            case R.id.action_delete:
+            case R.id.action_delete_on_task_list:
                 if (item != null) {
                     taskDao.deleteRow(item.getId());
                     Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
                     reloadData();
                 }
                 break;
-            case R.id.action_edit:
+            case R.id.action_edit_on_task_list:
                 Intent intent = new Intent(getActivity(), EditTaskActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", item);
                 intent.putExtra("my_package", bundle);
                 startActivityForResult(intent, REQUEST_CODE_EDIT);
+                Log.d("Loan", "onStartEdit");
                 break;
 
         }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,12 +40,14 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
     String timeFormat = "HH:mm";
     SimpleDateFormat simpleDateFormat;
     int taskId;
+    boolean isDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_task);
         getFormWidget();
+        Log.d("Loan", "onCreateEdit");
         customToolbar();
         getDefaultInfo();
         getDefaultData();
@@ -62,7 +65,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
             edt_description.setText(item.getDescription());
             tvDate.setText(item.getDate());
             tvTime.setText(item.getTime());
-
+            isDone = item.isDone();
             chkNotify.setChecked(item.isNotify());
             switch (item.getPriority()) {
                 case 1:
@@ -75,6 +78,8 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
                     rdPriority3.setChecked(true);
                     break;
             }
+            Log.d("Loan", "onGetDefaultData: " + taskId + ": " + edt_title.getText().toString());
+
         }
     }
 
@@ -151,6 +156,7 @@ public class EditTaskActivity extends AppCompatActivity implements View.OnClickL
         taskDto.setTime(tvTime.getText().toString());
         taskDto.setPriority(getPriorityRadioBtn());
         taskDto.setNotify(chkNotify.isChecked());
+        taskDto.setDone(isDone);
 
         TaskDao taskDao = new TaskDao(getApplication());
         long userId = taskDao.updateRowEdit(taskDto, taskDto.getId());

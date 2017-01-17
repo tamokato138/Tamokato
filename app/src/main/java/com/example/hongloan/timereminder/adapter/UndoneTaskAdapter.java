@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import com.example.hongloan.timereminder.R;
 import com.example.hongloan.timereminder.database.TaskDto;
-import com.example.hongloan.timereminder.interfaces.OnTaskListAdapterListener;
-import com.example.hongloan.timereminder.interfaces.OnUpdateUndoneTaskListener;
+import com.example.hongloan.timereminder.interfaces.OnUndoneTaskAdapterListener;
 
 import java.util.ArrayList;
 
@@ -22,30 +21,28 @@ import java.util.ArrayList;
  * Created by Hong Loan on 03/01/2017.
  */
 
-public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+public class UndoneTaskAdapter extends RecyclerView.Adapter<UndoneTaskAdapter.ViewHolder> {
     ArrayList<TaskDto> mData = new ArrayList<>();
 
-    private OnTaskListAdapterListener onTaskListAdapterListener;
+    private OnUndoneTaskAdapterListener onUndoneTaskAdapterListener;
     private int selectedPosition = -1;
 
 
-    public void setOnTaskListAdapterListener(OnTaskListAdapterListener onTaskListAdapterListener) {
-        this.onTaskListAdapterListener = onTaskListAdapterListener;
+    public void setOnUndoneTaskAdapterListener(OnUndoneTaskAdapterListener onUndoneTaskAdapterListener) {
+        this.onUndoneTaskAdapterListener = onUndoneTaskAdapterListener;
     }
 
-
-
-
     @Override
-    public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UndoneTaskAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d("Huey", "onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_task, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
+
     @Override
-    public void onBindViewHolder(final TaskListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final UndoneTaskAdapter.ViewHolder holder, final int position) {
         Log.d("Huey", "onBindViewHolder " + position);
         holder.tvTitle.setText(mData.get(position).getTitle());
         holder.tvTime.setText(mData.get(position).getDate() + " - " + mData.get(position).getTime());
@@ -59,21 +56,18 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 setSelectedPosition(position);
                 boolean isChecked = ((Switch) v).isChecked();
                 holder.swOnOff.setChecked(isChecked);
-                onTaskListAdapterListener.onTaskListAdapterSwitchListener(isChecked);
+                onUndoneTaskAdapterListener.onUndoneTaskAdapterSwitchListener(isChecked);
             }
         });
-
-
         holder.chkDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setSelectedPosition(position);
                 boolean isChecked = ((CheckBox) v).isChecked();
                 holder.chkDone.setChecked(isChecked);
-                onTaskListAdapterListener.onTaskListAdapterCheckIsDoneListener(isChecked);
+                onUndoneTaskAdapterListener.onUndoneTaskAdapterCheckIsDoneListener(isChecked);
             }
         });
-
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -112,7 +106,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         CheckBox chkDone;
         TextView tvTitle, tvTime, tvPriority;
         Switch swOnOff;
@@ -128,12 +122,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             itemView.setOnCreateContextMenuListener(this);
 
         }
-
         @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.add(Menu.NONE, R.id.action_delete_on_task_list, Menu.NONE, R.string.menu_context_item_delete);
-            menu.add(Menu.NONE, R.id.action_edit_on_task_list, Menu.NONE, R.string.menu_context_item_edit);
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+            menu.add(Menu.NONE, R.id.action_delete_on_undone, Menu.NONE, R.string.menu_context_item_delete);
+            menu.add(Menu.NONE, R.id.action_edit_on_undone, Menu.NONE, R.string.menu_context_item_edit);
         }
+
     }
 
 

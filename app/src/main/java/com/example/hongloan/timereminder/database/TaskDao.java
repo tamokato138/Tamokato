@@ -49,11 +49,9 @@ public class TaskDao {
                 Task.TaskEntry.COLUMN_IS_DONE,
                 Task.TaskEntry.COLUMN_IS_NOTIFY,
         };
-        String sortOrder = Task.TaskEntry.COLUMN_PRIORITY + " DESC"
-                + DatabaseConstants.COMMA_SEP + Task.TaskEntry.COLUMN_DATE
-                + DatabaseConstants.COMMA_SEP + Task.TaskEntry.COLUMN_TIME
-                + DatabaseConstants.COMMA_SEP + Task.TaskEntry._ID
-                + DatabaseConstants.COMMA_SEP + Task.TaskEntry.COLUMN_IS_DONE;
+        String sortOrder = Task.TaskEntry.COLUMN_IS_DONE + " ASC"
+                + DatabaseConstants.COMMA_SEP + Task.TaskEntry.COLUMN_PRIORITY + " DESC"
+                ;
         Cursor cursor = db.query(
                 Task.TaskEntry.TABLE_NAME,
                 projection,
