@@ -8,8 +8,8 @@
     <dimen name="card_view_task_tv_title_size">18sp</dimen>
     <dimen name="card_view_task_tv_time_size">15sp</dimen>
     <dimen name="card_view_task_tv_priority">15sp</dimen>
-    <dimen name="card_view_task_chk_done_margin">10dp</dimen>
-    <dimen name="card_view_task_content_margin">10dp</dimen>
+    <dimen name="card_view_task_chk_done_margin">20dp</dimen>
+    <dimen name="card_view_task_content_margin">5dp</dimen>
 
 
     <dimen name="fragment_task_list_btn_add_task_width">50dp</dimen>

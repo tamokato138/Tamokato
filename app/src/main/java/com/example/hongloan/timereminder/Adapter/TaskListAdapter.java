@@ -1,5 +1,6 @@
 package com.example.hongloan.timereminder.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.example.hongloan.timereminder.R;
 import com.example.hongloan.timereminder.database.TaskDto;
 import com.example.hongloan.timereminder.interfaces.OnTaskListAdapterListener;
-import com.example.hongloan.timereminder.interfaces.OnUpdateUndoneTaskListener;
 
 import java.util.ArrayList;
 
@@ -26,15 +26,16 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     ArrayList<TaskDto> mData = new ArrayList<>();
 
     private OnTaskListAdapterListener onTaskListAdapterListener;
+    //    private OnUpdateUndoneTaskListener onUpdateUndoneTaskListener;
     private int selectedPosition = -1;
 
+//    public void setOnUpdateUndoneTaskListener(OnUpdateUndoneTaskListener onUpdateUndoneTaskListener) {
+//        this.onUpdateUndoneTaskListener = onUpdateUndoneTaskListener;
+//    }
 
     public void setOnTaskListAdapterListener(OnTaskListAdapterListener onTaskListAdapterListener) {
         this.onTaskListAdapterListener = onTaskListAdapterListener;
     }
-
-
-
 
     @Override
     public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,6 +48,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final TaskListAdapter.ViewHolder holder, final int position) {
         Log.d("Huey", "onBindViewHolder " + position);
+
+
         holder.tvTitle.setText(mData.get(position).getTitle());
         holder.tvTime.setText(mData.get(position).getDate() + " - " + mData.get(position).getTime());
         holder.tvPriority.setText(showPriority(mData.get(position).getPriority()));
@@ -60,6 +63,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 boolean isChecked = ((Switch) v).isChecked();
                 holder.swOnOff.setChecked(isChecked);
                 onTaskListAdapterListener.onTaskListAdapterSwitchListener(isChecked);
+//                onUpdateUndoneTaskListener.onUpdateUndoneTaskListener();
             }
         });
 
@@ -71,6 +75,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 boolean isChecked = ((CheckBox) v).isChecked();
                 holder.chkDone.setChecked(isChecked);
                 onTaskListAdapterListener.onTaskListAdapterCheckIsDoneListener(isChecked);
+//                onUpdateUndoneTaskListener.onUpdateUndoneTaskListener();
+
             }
         });
 
@@ -81,6 +87,16 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 return false;
             }
         });
+        if (mData.get(position).isDone()) {
+            holder.tvTitle.setTextColor(Color.parseColor("#737373"));
+            holder.tvTime.setTextColor(Color.parseColor("#737373"));
+            holder.tvPriority.setTextColor(Color.parseColor("#737373"));
+            holder.swOnOff.setChecked(false);
+        } else {
+            holder.tvTitle.setTextColor(Color.parseColor("#000000"));
+            holder.tvTime.setTextColor(Color.parseColor("#383838"));
+            holder.tvPriority.setTextColor(Color.parseColor("#383838"));
+        }
 
 
     }

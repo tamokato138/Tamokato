@@ -75,6 +75,7 @@ public class UndoneTaskFragment extends Fragment {
 
     private void addEvents() {
         adapter.setOnUndoneTaskAdapterListener(new ItemEvents());
+//        taskListFragment.setOnTaskListUpdateUndoneTaskListener(new ItemEvents());
     }
 
     private void loadData() {
@@ -141,7 +142,7 @@ public class UndoneTaskFragment extends Fragment {
         }
 
 //        @Override
-//        public void onUpdateUndoneTaskListener() {
+//        public void onTaskListUpdateUndoneTask() {
 //            TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
 //            ArrayList<TaskDto> data = taskDao.loadUnDoneTask();
 //            adapter.addDataToAdapter(data);

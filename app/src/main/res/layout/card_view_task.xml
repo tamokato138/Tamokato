@@ -10,25 +10,26 @@
     app:cardCornerRadius="@dimen/card_view_task_radious">
 
     <LinearLayout
+        android:id="@+id/card_view_task_ll_container"
         style="@style/AlertDialog.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    android:id="@+id/card_view_task_ll_container"
         android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/card_view_task_chk_done"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/card_view_task_chk_done_margin"
+            android:layout_weight="1"
+            android:button="@drawable/selector_check_box_done"
             android:gravity="center_vertical|center_horizontal" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="8"
-            android:layout_margin="@dimen/card_view_task_content_margin"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_view_task_content_margin"
+            android:layout_weight="8"
             android:orientation="vertical">
 
             <TextView
@@ -61,11 +62,10 @@
         <Switch
             android:id="@+id/card_view_task_sw_on_off_remind"
             android:layout_width="0dp"
-            android:layout_weight="2"
-
-            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            />
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+             />
 
 
     </LinearLayout>
