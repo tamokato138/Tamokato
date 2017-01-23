@@ -11,7 +11,6 @@ import android.text.Spanned;
 import android.text.style.ImageSpan;
 
 import com.example.hongloan.timereminder.R;
-import com.example.hongloan.timereminder.fragment.UndoneTaskFragment;
 import com.example.hongloan.timereminder.fragment.LocationFragment;
 import com.example.hongloan.timereminder.fragment.TaskListFragment;
 import com.example.hongloan.timereminder.fragment.WeatherFragment;
@@ -23,7 +22,7 @@ import com.example.hongloan.timereminder.fragment.WeatherFragment;
 public class PagerAdapter extends FragmentStatePagerAdapter {
     Context context;
     int tabCount;
-    public int[] tabIconId = {R.drawable.ic_menu, R.drawable.ic_list_task, R.drawable.ic_weather, R.drawable.ic_location};
+    public int[] tabIconId = {R.drawable.ic_list_task, R.drawable.ic_weather, R.drawable.ic_location};
 
     public PagerAdapter(FragmentManager fm, int tabCount, Context context) {
         super(fm);
@@ -38,12 +37,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 TaskListFragment taskListFragment = TaskListFragment.getInstance();
                 return taskListFragment;
             case 1:
-                UndoneTaskFragment undoneTaskFragment = UndoneTaskFragment.getInstance();
-                return undoneTaskFragment;
-            case 2:
                 WeatherFragment weatherFragment = WeatherFragment.getInstance();
                 return weatherFragment;
-            case 3:
+            case 2:
                 LocationFragment locationFragment = LocationFragment.getInstance();
                 return locationFragment;
             default:

@@ -23,7 +23,6 @@ import com.example.hongloan.timereminder.adapter.TaskListAdapter;
 import com.example.hongloan.timereminder.database.TaskDao;
 import com.example.hongloan.timereminder.database.TaskDto;
 import com.example.hongloan.timereminder.interfaces.OnTaskListAdapterListener;
-import com.example.hongloan.timereminder.interfaces.OnUpdateUndoneTaskListener;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,6 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
     RecyclerView.LayoutManager layoutManager;
     TaskListAdapter adapter;
     FrameLayout container;
-//    OnTaskListUpdateUndoneTaskListener onTaskListUpdateUndoneTaskListener;
 
 
     public static final int REQUEST_CODE_ADD_NEW = 1;
@@ -61,14 +59,9 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         return view;
     }
 
-//    public void setOnTaskListUpdateUndoneTaskListener(OnTaskListUpdateUndoneTaskListener onTaskListUpdateUndoneTaskListener) {
-//        this.onTaskListUpdateUndoneTaskListener = onTaskListUpdateUndoneTaskListener;
-//    }
-
     private void addEvents() {
         btnAddTask.setOnClickListener(new ItemEvents());
         adapter.setOnTaskListAdapterListener(new ItemEvents());
-//        adapter.setOnUpdateUndoneTaskListener(new ItemEvents());
     }
 
     public static TaskListFragment getInstance() {
@@ -125,7 +118,7 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         }
     }
 
-    public class ItemEvents implements OnTaskListAdapterListener, View.OnClickListener, OnUpdateUndoneTaskListener {
+    public class ItemEvents implements OnTaskListAdapterListener, View.OnClickListener{
 
         @Override
         public void onClick(View v) {
@@ -142,7 +135,6 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
             TaskDao taskDao = new TaskDao(getActivity().getApplicationContext());
             taskDao.updateNotify(itemId, isChecked);
             Toast.makeText(getContext(), "Notification changed!", Toast.LENGTH_SHORT).show();
-//            onTaskListUpdateUndoneTaskListener.onTaskListUpdateUndoneTask();
         }
 
         @Override
@@ -162,16 +154,10 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
                 }
             };
             handler.post(r);
-//            onTaskListUpdateUndoneTaskListener.onTaskListUpdateUndoneTask();
             Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT).show();
         }
 
-        @Override
-        public void onUpdateUndoneTaskListener() {
-            Toast.makeText(getContext(), "Load Lai list Undone", Toast.LENGTH_SHORT).show();
-//            onTaskListUpdateUndoneTaskListener.onTaskListUpdateUndoneTask();
 
-        }
     }
 
 
@@ -199,6 +185,8 @@ public class TaskListFragment extends Fragment implements View.OnCreateContextMe
         }
         return super.onContextItemSelected(menuItem);
     }
+
+
 }
 
 

@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     TabLayout tabLayout;
     PagerAdapter adapter;
     Toolbar toolbar;
-    int tabCount = 4;
+    int tabCount = 3;
 
 
     @Override
@@ -59,12 +59,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_task_list));
                 break;
             case 1:
-                setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_undone_task));
-                break;
-            case 2:
                 setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_weather));
                 break;
-            case 3:
+            case 2:
                 setTitleToolbar(getResources().getString(R.string.main_activity_toolbar_title_location));
                 break;
         }

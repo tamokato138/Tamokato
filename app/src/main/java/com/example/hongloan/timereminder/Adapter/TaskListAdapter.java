@@ -26,12 +26,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     ArrayList<TaskDto> mData = new ArrayList<>();
 
     private OnTaskListAdapterListener onTaskListAdapterListener;
-    //    private OnUpdateUndoneTaskListener onUpdateUndoneTaskListener;
     private int selectedPosition = -1;
 
-//    public void setOnUpdateUndoneTaskListener(OnUpdateUndoneTaskListener onUpdateUndoneTaskListener) {
-//        this.onUpdateUndoneTaskListener = onUpdateUndoneTaskListener;
-//    }
 
     public void setOnTaskListAdapterListener(OnTaskListAdapterListener onTaskListAdapterListener) {
         this.onTaskListAdapterListener = onTaskListAdapterListener;
@@ -97,6 +93,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             holder.tvTime.setTextColor(Color.parseColor("#383838"));
             holder.tvPriority.setTextColor(Color.parseColor("#383838"));
         }
+
+
 
 
     }

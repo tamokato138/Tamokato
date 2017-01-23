@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_speaker" android:state_checked="true"></item>
-    <item android:drawable="@drawable/ic_muted" android:state_checked="false"></item>
-    <item android:drawable="@drawable/ic_speaker"></item>
+    <item android:drawable="@drawable/ic_alarm_on" android:state_checked="true"></item>
+    <item android:drawable="@drawable/ic_alarm_off" android:state_checked="false"></item>
+    <item android:drawable="@drawable/ic_alarm_on"></item>
 </selector>

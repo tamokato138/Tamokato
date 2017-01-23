@@ -192,4 +192,6 @@ public class AddNewTaskActivity extends AppCompatActivity implements View.OnClic
         timePickerDialog.setTitle("Choose start time!");
         timePickerDialog.show();
     }
+
+
 }
