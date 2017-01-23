@@ -161,6 +161,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+
+                    android:button="@drawable/selector_rd_btn"
                     android:text="!" />
 
                 <RadioButton
@@ -168,13 +170,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:button="@drawable/selector_rd_btn"
+
                     android:text="!!" />
 
                 <RadioButton
                     android:id="@+id/activity_add_new_task_rd_priority_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:layout_gravity="center_vertical"
+                    android:button="@drawable/selector_rd_btn"
                     android:text="!!!" />
             </RadioGroup>
 

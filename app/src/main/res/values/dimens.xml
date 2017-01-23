@@ -12,9 +12,9 @@
     <dimen name="card_view_task_content_margin">5dp</dimen>
 
 
-    <dimen name="fragment_task_list_btn_add_task_width">50dp</dimen>
-    <dimen name="fragment_task_list_btn_add_task_height">50dp</dimen>
-    <dimen name="fragment_task_list_btn_add_task_margin">20dp</dimen>
+    <dimen name="fragment_task_list_btn_add_task_width">100dp</dimen>
+    <dimen name="fragment_task_list_btn_add_task_height">100dp</dimen>
+    <dimen name="fragment_task_list_btn_add_task_margin">10dp</dimen>
 
     <dimen name="activity_add_new_task_margin_top">20dp</dimen>
     <dimen name="activity_add_new_task_edt_margin_left">60dp</dimen>
